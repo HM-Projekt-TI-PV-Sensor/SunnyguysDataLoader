@@ -1,0 +1,7 @@
+{
+  "dbAddress": "localhost",
+  "dbPort": 3001,
+  "dbTable": "postgres",
+  "dbUser": "postgres",
+  "dbPassword": "admin"
+}
