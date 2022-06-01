@@ -1,3 +1,6 @@
+package util
+
+import db.MeasuredData
 import java.sql.Timestamp
 import java.util.concurrent.ThreadLocalRandom
 

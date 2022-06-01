@@ -1,10 +1,23 @@
-fun main(args: Array<out String>) {
-    val upload = args.isNotEmpty() && args[0] == "upload"
-    if(upload) {
-        println("> Started application for uploading")
-    } else {
-        println("> Started application for generating")
-    }
-    Application().run(!upload)
+import java.io.File
+import ui.SunnyWindow
+import util.DataGenerator
+
+fun main() {
+    SunnyWindow()
 }
 
+fun gen() {
+    println("Generating")
+    val data = DataGenerator.generate(100)
+    val builder = java.lang.StringBuilder()
+    println("Mapping")
+    data.forEach {
+        builder.append("${it.time.time} > ${it.temp} | ${it.pv}\n")
+    }
+    println("Writing")
+    val file = File("data.txt")
+    if(!file.exists()) {
+        file.createNewFile()
+    }
+    file.writeText(builder.toString())
+}
