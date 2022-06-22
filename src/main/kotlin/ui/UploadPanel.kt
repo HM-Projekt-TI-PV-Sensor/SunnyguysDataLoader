@@ -5,7 +5,6 @@ import db.MeasuredData
 import java.awt.BorderLayout
 import java.io.File
 import java.nio.charset.StandardCharsets
-import java.sql.Statement
 import java.sql.Timestamp
 import java.util.concurrent.CompletableFuture
 import javax.swing.JButton
@@ -70,7 +69,7 @@ class UploadPanel : JPanel(BorderLayout()) {
             val stamp = split[0].toLong()
             val temp = split[1].split(" | ")[0].toDouble()
             val pv = split[1].split(" | ")[1].toDouble()
-            MeasuredData(Timestamp(stamp), temp, pv)
+            MeasuredData(Timestamp(stamp * 1000), temp, pv)
         } catch (exception: Exception) {
             null
         }
@@ -95,7 +94,7 @@ class UploadPanel : JPanel(BorderLayout()) {
                 currentStatement.setDouble(2, entry.temp)
                 currentStatement.setDouble(3, entry.pv)
                 currentStatement.addBatch()
-                if(count > 0 && count % batchSize == 0) {
+                if (count > 0 && count % batchSize == 0) {
                     currentStatement.executeBatch()
                     currentStatement = connection.prepareStatement(sql)
                 }
