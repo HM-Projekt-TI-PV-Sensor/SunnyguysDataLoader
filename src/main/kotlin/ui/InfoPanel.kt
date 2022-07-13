@@ -8,6 +8,10 @@ import javax.swing.JLabel
 import javax.swing.JPanel
 import kotlin.concurrent.scheduleAtFixedRate
 
+/**
+ * This is a small panel at the bottom that simply pings the DB and
+ * checks if it is reachable with the current credentials.
+ */
 class InfoPanel: JPanel() {
 
     private val dotLabel = JLabel()

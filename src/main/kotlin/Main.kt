@@ -9,6 +9,9 @@ fun main() {
     SunnyWindow()
 }
 
+/**
+ * Utility method for generating random data
+ */
 fun gen() {
     println("Generating")
     val data = DataGenerator.generate(100)
