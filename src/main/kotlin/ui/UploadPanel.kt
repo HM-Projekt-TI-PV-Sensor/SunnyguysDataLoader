@@ -83,6 +83,8 @@ class UploadPanel : JPanel(BorderLayout()) {
         progressBar.maximum = data.size + 1
         progressBar.minimum = 0
         progressBar.value = 0
+
+        // Batch size of each SQL query. Increase for better performance, but it will look less good :D
         val batchSize = 10
         DatabaseAccess.withConnection { connection ->
             val sql = "INSERT INTO DATA (STAMP, TEMP, PV) VALUES(?, ?, ?) ON CONFLICT DO NOTHING"

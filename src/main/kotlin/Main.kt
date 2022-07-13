@@ -2,6 +2,9 @@ import java.io.File
 import ui.SunnyWindow
 import util.DataGenerator
 
+/**
+ * Entry point. Simply instantiates SunnyWindow.class
+ */
 fun main() {
     SunnyWindow()
 }

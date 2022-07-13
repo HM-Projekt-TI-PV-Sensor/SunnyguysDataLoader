@@ -3,6 +3,9 @@ package db
 import java.sql.Connection
 import java.sql.DriverManager
 
+/**
+ * This class is used for database credentials and access.
+ */
 object DatabaseAccess {
 
     init {

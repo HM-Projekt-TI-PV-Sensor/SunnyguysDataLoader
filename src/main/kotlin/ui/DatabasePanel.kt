@@ -10,16 +10,21 @@ import javax.swing.JPanel
 import javax.swing.JPasswordField
 import javax.swing.JTextField
 
+/**
+ * Panel that displays the credentials of DatabaseAccess.class
+ */
 class DatabasePanel(private val infoPanel: InfoPanel) : JPanel(BorderLayout()) {
 
     private val connectionUrlLabel = JLabel()
 
+    /**
+     * Initializes every property and creates an update button for every line.
+     */
     init {
         this.preferredSize = Dimension(680, 300)
 
         val inPanel = JPanel()
         this.add(inPanel, BorderLayout.CENTER)
-        //this.add(JPanel(), BorderLayout.WEST)
 
         val connectionUrlPanel = JPanel(BorderLayout())
         connectionUrlPanel.preferredSize = Dimension(720, 32)
@@ -30,30 +35,33 @@ class DatabasePanel(private val infoPanel: InfoPanel) : JPanel(BorderLayout()) {
         val addressPanel = JPanel(BorderLayout())
         addressPanel.preferredSize = Dimension(720, 30)
         inPanel.add(addressPanel)
-        trinity("Address", "localhost", addressPanel) { DatabaseAccess.address = it }
+        initPropertyPanel("Address", "localhost", addressPanel) { DatabaseAccess.address = it }
 
         val portPanel = JPanel(BorderLayout())
         portPanel.preferredSize = Dimension(720, 30)
         inPanel.add(portPanel)
-        trinity("Port", "3001", portPanel) { DatabaseAccess.port = it.toIntOrNull() ?: 3001 }
+        initPropertyPanel("Port", "3001", portPanel) { DatabaseAccess.port = it.toIntOrNull() ?: 3001 }
 
         val tablePanel = JPanel(BorderLayout())
         tablePanel.preferredSize = Dimension(720, 30)
         inPanel.add(tablePanel)
-        trinity("DB Table", "postgres", tablePanel) { DatabaseAccess.table = it }
+        initPropertyPanel("DB Table", "postgres", tablePanel) { DatabaseAccess.table = it }
 
         val userPanel = JPanel(BorderLayout())
         userPanel.preferredSize = Dimension(720, 30)
         inPanel.add(userPanel)
-        trinity("DB User", "postgres", userPanel) { DatabaseAccess.user = it }
+        initPropertyPanel("DB User", "postgres", userPanel) { DatabaseAccess.user = it }
 
         val passwordPanel = JPanel(BorderLayout())
         passwordPanel.preferredSize = Dimension(720, 30)
         inPanel.add(passwordPanel)
-        trinity("DB Password", "admin", passwordPanel, true) { DatabaseAccess.password = it }
+        initPropertyPanel("DB Password", "admin", passwordPanel, true) { DatabaseAccess.password = it }
     }
 
-    private fun trinity(labelName: String, defaultValue: String, parent: JPanel, pw: Boolean = false, action: (String) -> Unit) {
+    /**
+     * Initializes a property panel
+     */
+    private fun initPropertyPanel(labelName: String, defaultValue: String, parent: JPanel, pw: Boolean = false, action: (String) -> Unit) {
         val label = JLabel(labelName)
         label.font = Font("Arial", Font.BOLD, 14)
         label.preferredSize = Dimension(128, 30)
@@ -74,6 +82,9 @@ class DatabasePanel(private val infoPanel: InfoPanel) : JPanel(BorderLayout()) {
         parent.add(button, BorderLayout.WEST)
     }
 
+    /**
+     * Updates the JDBC String at the top of the panel
+     */
     private fun updateUrlLabel() {
         connectionUrlLabel.font = Font("Arial", Font.BOLD, 16)
         connectionUrlLabel.text = "    ${DatabaseAccess.connectionUrl()}"
